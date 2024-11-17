@@ -1,0 +1,20 @@
+#!/bin/bash
+#==========================================
+#Name:isohub
+#Autor:h0lik@linux
+#GitHub:github.com/h0lik
+#WebSite:https://soraxlab.ru
+#Date:23.09.2024
+#==========================================
+source /opt/srvtools/isohub/lib/evn-lib
+createpoolFync() {
+echo -e "Hello \e[32m $USER \e[0m ,Creating a pool storage ISO?"
+read -p "-Create pool storage?:" poollib
+echo "pool=$poollib" >> /opt/srvtools/isohub/lib/evn-lib
+}
+testpoolFync() {
+    cd $pool 
+    touch test-pool.txt
+    echo "test pool" >> test-pool.txt
+    cat test-pool.txt
+}

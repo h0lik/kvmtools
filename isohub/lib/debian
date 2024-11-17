@@ -1,0 +1,45 @@
+#!/bin/bash 
+#==========================================
+#Name:isohub
+#Autor:h0lik@linux
+#GitHub:github.com/h0lik
+#WebSite:https://soraxlab.ru
+#Date:23.09.2024
+#==========================================
+source /opt/srvtools/isohub/lib/evn-lib
+green='\e[32m'
+blue='\e[34m'
+clear='\e[0m'
+ColorGreen(){
+	echo -ne $green$1$clear
+}
+ColorBlue(){
+	echo -ne $blue$1$clear
+}
+debian12() {
+	cd $pool
+	sudo wget https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/debian-12.7.0-amd64-netinst.iso
+	echo -e "Downloaded Debian-12 \e[32m successfully! \e[0m"
+	echo -e "SHA-256 \e[32m    \3[0m"
+}
+debian11() {
+	cd $pool
+	sudo wget  https://cdimage.debian.org/cdimage/archive/11.9.0/amd64/iso-cd/debian-11.9.0-amd64-netinst.iso
+	echo -e "Downloaded Debian-11 \e[32m successfully! \e[0m"
+	echo -e "SHA-256 \e[32m   \e[0m"
+}
+menu_debian() {
+echo -ne "
+Distribution List
+$(ColorGreen '1)') Debain-Linux 11
+$(ColorGreen '2)') Debain-Linux 12
+$(ColorGreen '0)') exit
+$(ColorBlue 'Choose a distribution:') "
+        read a
+        case $a in
+	        1) debian11 ; menu_debian  ;;
+	        2) debian12 ; menu_debian ;;
+			0) exit 0 ;;
+			*) echo -e $red"Wrong option."$clear; WrongCommand;;
+        esac
+}

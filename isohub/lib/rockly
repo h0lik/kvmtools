@@ -1,0 +1,46 @@
+#!/bin/bash
+#==========================================
+#Name:isohub
+#Autor:h0lik@linux
+#GitHub:github.com/h0lik
+#WebSite:https://soraxlab.ru
+#Date:23.09.2024
+#==========================================
+source /opt/srvtools/isohub/lib/evn-lib
+green='\e[32m'
+blue='\e[34m'
+clear='\e[0m'
+ColorGreen(){
+	echo -ne $green$1$clear
+}
+ColorBlue(){
+	echo -ne $blue$1$clear
+}
+rockly8() {
+	cd $pool
+	sudo wget  https://download.rockylinux.org/pub/rocky/8/isos/x86_64/Rocky-8.10-x86_64-minimal.iso
+	echo -e "Downloaded RocklyLinux-8 \e[32m successfully! \e[0m"
+	echo -e "SHA-256 \e[32m 06019fd7c4f956b2b0ed37393e81c577885e4ebd518add249769846711a09dc4 \e[0m"
+}
+rockly9() {
+	cd $pool
+	sudo wget  https://download.rockylinux.org/pub/rocky/9/isos/x86_64/Rocky-9.4-x86_64-minimal.iso
+	echo -e "Downloaded RocklyLinux-9 \e[32m successfully! \e[0m"
+	echo -e "SHA-256 \e[32m eef8d26018f4fcc0dc101c468f65cbf588f2184900c556f243802e9698e56729 \e[0m"
+}
+
+menu_rockly() {
+echo -ne "
+Distribution List
+$(ColorGreen '1)') Rockly-Linux 8
+$(ColorGreen '2)') Rockly-Linux 9 
+$(ColorGreen '0)') exit
+$(ColorBlue 'Choose a distribution:') "
+        read a
+        case $a in
+	        1) rockly8 ; menu_rockly ;;
+	        2) rockly9 ; menu_rockly ;;
+			0) exit 0 ;;
+			*) echo -e $red"Wrong option."$clear; WrongCommand;;
+        esac
+}

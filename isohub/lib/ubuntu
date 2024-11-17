@@ -1,0 +1,64 @@
+#!/bin/bash
+#==========================================
+#Name:isohub
+#Autor:h0lik@linux
+#GitHub:github.com/h0lik
+#WebSite:https://soraxlab.ru
+#Date:23.09.2024
+#==========================================
+source /opt/srvtools/isohub/lib/evn-lib
+green='\e[32m'
+blue='\e[34m'
+clear='\e[0m'
+ColorGreen(){
+	echo -ne $green$1$clear
+}
+ColorBlue(){
+	echo -ne $blue$1$clear
+}
+ubuntu_server_20() {
+	cd $pool
+	sudo wget  https://releases.ubuntu.com/20.04.6/ubuntu-20.04.6-live-server-amd64.iso
+	echo -e "Downloaded ubuntu-server-20.04 \e[32m successfully! \e[0m"
+	echo -e "SHA-256 \e[32m   \e[0m"
+}
+
+ubuntu_server_22() {
+	cd $pool
+	sudo wget  https://releases.ubuntu.com/22.04.4/ubuntu-22.04.4-live-server-amd64.iso
+	echo -e "Downloaded ubuntu-server-22.04.lts \e[32m successfully! \e[0m"
+	echo -e "SHA-256 \e[32m   \e[0m"
+}
+ubuntu_server_23() {
+	cd $pool
+	sudo wget  https://releases.ubuntu.com/23.10/ubuntu-23.10-live-server-amd64.iso
+	echo -e "Downloaded ubuntu-server-23.10 \e[32m successfully! \e[0m"
+	echo -e "SHA-256 \e[32m \e[0m"
+}
+
+ubuntu_server_24() {
+	cd $pool
+	sudo wget  https://releases.ubuntu.com/noble/ubuntu-24.04.1-live-server-amd64.iso
+	echo -e "Downloaded ubuntu-server-24.04 \e[32m successfully! \e[0m"
+	echo -e "SHA-256 \e[32m   \e[0m"
+}
+
+menu_ubuntu() {
+echo -ne "
+Distribution List
+$(ColorGreen '1)') Ubuntu-server-20.04
+$(ColorGreen '2)') Ubuntu-server-22.04
+$(ColorGreen '3)') Ubuntu-server-23.04
+$(ColorGreen '4)') Ubuntu-server-24.04
+$(ColorGreen '0)') exit
+$(ColorBlue 'Choose a distribution:') "
+        read a
+        case $a in
+	        1) ubuntu_server_20 ; menu_ubuntu ;;
+	        2) ubuntu_server_22 ; menu_ubuntu ;;
+			3) ubuntu_server_23 ; menu_ubuntu ;;
+			4) ubuntu_server_24 ; menu_ubuntu ;;
+			0) exit 0 ;;
+			*) echo -e $red"Wrong option."$clear; WrongCommand;;
+        esac
+}

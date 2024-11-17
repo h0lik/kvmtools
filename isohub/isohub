@@ -1,0 +1,55 @@
+#!/bin/bash 
+#==========================================
+#Name:isohub
+#Autor:h0lik@linux
+#GitHub:github.com/h0lik
+#WebSite:https://soraxlab.ru
+#Date:23.09.2024
+#==========================================
+dir=/opt/srvtools/isohub/
+lib=/opt/srvtools/isohub/lib
+source $lib/ubuntu
+source $lib/debian
+source $lib/alma
+source $lib/rockly
+source $lib/fedora-server
+source $lib/alpine
+source $lib/centos
+source $lib/createpool
+helpfunc() {
+echo -e "========================================"
+echo -e "Script download ISO"
+echo -e "========================================"
+echo -e "ISO minimal"
+echo -e " -h | --help "
+echo -e " -c | --create-pool Specify the storage location ISO"
+echo -e " -t | --test Testing Pool Entry test"
+echo -e " --rockly   | Rockly Linux  netinst"
+echo -e " --alma     | Alma Linux  netinst"
+echo -e " --debian   | Debian Linux  netinst"
+echo -e " --ubuntu   | Ubuntu Server netinst"
+echo -e " --Fedora   | Fedora Server  netinst"
+echo -e " --centos   | CentOS  netinst"
+echo -e " --alpine   | Alpine Linux netinst"
+echo -e "---------------------------------------"
+echo -e "$ isohub --debain12"
+echo -e "---------------------------------------"
+echo -e "======================================="
+}
+
+while [ -n "$1" ]
+do
+	case "$1" in 
+	-h | --help )helpfunc;;
+	-c | --create-pool)createpoolFync ;;
+	-t | --test)testpoolFync ;;
+	--rockly)menu_rockly ;;
+	--alma)menu_alma ;;
+	--debian)menu_debian ;;
+	--ubuntu)menu_ubuntu ;;
+	--fedora)fedora39srv ;;
+	--centos)centos9 ;;
+	--alpine)alpine;;
+esac 
+shift 
+done 
