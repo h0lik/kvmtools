@@ -6,11 +6,11 @@
 #WebSite:https://soraxlab.ru
 #Date:23.09.2024
 #==========================================
-source /opt/srvtools/isohub/lib/evn-lib
+source /opt/kvmtools/isohub/lib/evn-lib
 createpoolFync() {
 echo -e "Hello \e[32m $USER \e[0m ,Creating a pool storage ISO?"
 read -p "-Create pool storage?:" poollib
-echo "pool=$poollib" >> /opt/srvtools/isohub/lib/evn-lib
+echo "pool=$poollib" >> /opt/kvmtools/isohub/lib/evn-lib
 }
 testpoolFync() {
     cd $pool 

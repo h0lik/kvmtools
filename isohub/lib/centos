@@ -6,7 +6,7 @@
 #WebSite:https://soraxlab.ru
 #Date:23.09.2024
 #==========================================
-source /opt/srvtools/isohub/lib/evn-lib
+source /opt/kvmtools/isohub/lib/evn-lib
 centos9() {
 	cd $pool
 	sudo wget https://mirror.yandex.ru/centos-stream/9-stream/BaseOS/x86_64/iso/CentOS-Stream-9-latest-x86_64-boot.iso

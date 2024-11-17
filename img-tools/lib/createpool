@@ -1,0 +1,13 @@
+#!/bin/bash
+source /opt/kvmtools/img-tools/lib/env
+createpoolFync() {
+echo -e "Hello \e[32m $USER \e[0m ,Creating a pool storage ISO?"
+read -p "-Create pool storage?:" poollib
+echo "pool=$poollib" >> /opt/kvmtools/img-tools/lib/env
+}
+testpoolFync() {
+    cd $pool 
+    touch test-pool.txt
+    echo "test pool" >> test-pool.txt
+    cat test-pool.txt
+}

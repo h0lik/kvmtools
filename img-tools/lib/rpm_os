@@ -1,0 +1,60 @@
+#!/bin/bash 
+source /opt/kvmtools/img-tools/lib/env
+
+green='\e[32m'
+blue='\e[34m'
+clear='\e[0m'
+ColorGreen(){
+	echo -ne $green$1$clear
+}
+ColorBlue(){
+	echo -ne $blue$1$clear
+}
+
+# Donwload cloud images fedora linux
+fedora41() {
+	cd $pool
+	sudo wget https://builds.coreos.fedoraproject.org/prod/streams/stable/builds/41.20241027.3.0/x86_64/fedora-coreos-41.20241027.3.0-qemu.x86_64.qcow2.xz
+}
+# Donwload cloud images rokcly linux 
+rockly8() {
+	cd $pool
+	sudo wget https://repo.almalinux.org/almalinux/8/cloud/x86_64/images/AlmaLinux-8-GenericCloud-8.10-20240530.x86_64.qcow2
+}
+rockly9() {
+	cd $pool
+	sudo wget https://repo.almalinux.org/almalinux/9/cloud/x86_64/images/AlmaLinux-9-GenericCloud-9.4-20240507.x86_64.qcow2
+}
+# Donwload cloud images alma linux
+alma8() {
+	cd $pool
+	sudo wget https://repo.almalinux.org/almalinux/9/cloud/x86_64/images/AlmaLinux-9-GenericCloud-9.4-20240507.x86_64.qcow2
+}
+rockly9() {
+	cd $pool
+	sudo wget https://repo.almalinux.org/almalinux/9/cloud/x86_64/images/AlmaLinux-9-GenericCloud-9.4-20240507.x86_64.qcow2
+}
+
+# Menu download Cloud images 
+
+menu_rpm() {
+echo -ne "
+Distribution List 
+$(ColorGreen '1)') Fedora-Linux Cloud 41
+$(ColorGreen '2)') Rockly Linux Cloud 8
+$(ColorGreen '3)') Rockly Linux Cloud 9
+$(ColorGreen '4)') Alma Linux Cloud 8
+$(ColorGreen '5)') Alma Linux Cloud 9
+$(ColorGreen '0)') exit
+$(ColorBlue 'Choose a distribution:') "
+        read a
+        case $a in
+	        1) fedora41 ; menu_rpm  ;;
+	        2) rockly8 ; menu_rpm ;;
+            3) rockly9 ; menu_rpm ;;
+            4) alma8 ; menu_rpm ;;
+            5) alma9 ; menu_rpm ;;
+			0) exit 0 ;;
+			*) echo -e $red"Wrong option."$clear; WrongCommand;;
+        esac
+}

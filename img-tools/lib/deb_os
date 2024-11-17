@@ -1,0 +1,45 @@
+#!/bin/bash
+
+source /opt/kvmtools/img-tools/lib/env
+
+green='\e[32m'
+blue='\e[34m'
+clear='\e[0m'
+ColorGreen(){
+	echo -ne $green$1$clear
+}
+ColorBlue(){
+	echo -ne $blue$1$clear
+}
+# Donwload cloud images Ubuntu linux 
+ubuntu22() {
+	cd $pool
+	sudo wget https://builds.coreos.fedoraproject.org/prod/streams/stable/builds/41.20241027.3.0/x86_64/fedora-coreos-41.20241027.3.0-qemu.x86_64.qcow2.xz
+}
+ubuntu24() {
+	cd $pool
+	sudo wget https://builds.coreos.fedoraproject.org/prod/streams/stable/builds/41.20241027.3.0/x86_64/fedora-coreos-41.20241027.3.0-qemu.x86_64.qcow2.xz
+}
+# Donwload cloud images Ubuntu linux 
+debian12() {
+	cd $pool
+	sudo wget https://cloud.debian.org/images/cloud/bookworm/latest/debian-12-nocloud-amd64.qcow2
+}
+
+menu_deb() {
+echo -ne "
+Distribution List 
+$(ColorGreen '1)') Debian-Linux Cloud 12
+$(ColorGreen '2)') Ubuntu Linux Cloud 24.04
+$(ColorGreen '3)') Rockly Linux Cloud 22.04
+$(ColorGreen '0)') exit
+$(ColorBlue 'Choose a distribution:') "
+        read a
+        case $a in
+	        1) debian12 ; menu_deb  ;;
+	        2) ubuntu22 ; menu_deb ;;
+            3) ubuntu24 ; menu_deb ;;
+			0) exit 0 ;;
+			*) echo -e $red"Wrong option."$clear; WrongCommand;;
+        esac
+}

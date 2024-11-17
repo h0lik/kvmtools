@@ -6,7 +6,7 @@
 #WebSite:https://soraxlab.ru
 #Date:23.09.2024
 #==========================================
-source /opt/srvtools/isohub/lib/evn-lib
+source /opt/kvmtools/isohub/lib/evn-lib
 green='\e[32m'
 blue='\e[34m'
 clear='\e[0m'

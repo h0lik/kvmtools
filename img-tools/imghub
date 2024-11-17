@@ -1,0 +1,33 @@
+#!/bin/bash 
+
+lib=/opt/kvmtools/img-tools/lib
+source $lib/rpm_os
+source $lib/deb_os
+helpfunc() {
+echo -e "========================================"
+echo -e "Script download ISO"
+echo -e "========================================"
+echo -e "ISO minimal"
+echo -e " -h | --help "
+echo -e " -c | --create-pool Specify the storage location ISO"
+echo -e " -t | --test Test storage location ISO"
+echo -e " -r | --rpm List rpm base Distribution images cloud"
+echo -e " -d | --deb List deb base Distribution images cloud"
+echo -e "---------------------------------------"
+echo -e "$ isohub --debain12"
+echo -e "---------------------------------------"
+echo -e "======================================="
+}
+
+
+while [ -n "$1" ]
+do
+	case "$1" in 
+	-h | --help )helpfunc;;
+	-c | --create-pool)createpoolFync ;;
+	-t | --test)testpoolFync ;;
+    -r | --rpm)menu_rpm ;;
+    -d | --deb)menu_deb ;;
+esac 
+shift 
+done 

@@ -6,8 +6,8 @@
 #WebSite:https://soraxlab.ru
 #Date:23.09.2024
 #==========================================
-dir=/opt/srvtools/isohub/
-lib=/opt/srvtools/isohub/lib
+dir=/opt/kvmtools/isohub/
+lib=/opt/kvmtools/isohub/lib
 source $lib/ubuntu
 source $lib/debian
 source $lib/alma

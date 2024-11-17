@@ -6,7 +6,7 @@
 #WebSite:https://soraxlab.ru
 #Date:23.09.2024
 #==========================================
-source /opt/srvtools/isohub/lib/evn-lib
+source /opt/kvmtools/isohub/lib/evn-lib
 alpine() {
 	cd $pool
 	sudo wget https://dl-cdn.alpinelinux.org/alpine/v3.19/releases/x86_64/alpine-virt-3.19.1-x86_64.iso
