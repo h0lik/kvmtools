@@ -1,0 +1,11 @@
+- name: Первоначальная настройка Ubuntu
+hosts: "{{ w_host | default('kvm-node1') }}"
+tasks: 
+  - name: git clone auto create CLOUD VM 
+    ansible.builtin.git:
+    repo: git@git.redfex.loc:floki/kvmtools.git
+    dest: /opt/kvmtools
+    single_branch: yes
+    version: main
+  - name: Create VM - KVM-srv
+    script: /opt/kvmtools/test_vm.sh
