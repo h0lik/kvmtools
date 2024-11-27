@@ -1,0 +1,50 @@
+#cloud-config
+hostname: test
+fqdn: test.redfex.loc
+manage_etc_hosts: true 
+users:
+    - name: root
+      shell: /bin/bash
+      ssh_authorized_keys:
+        - ssh-key
+    - name: name user
+      groups: wheel
+      home: /home/  <- name user
+      shell: /bin/bash
+      lock_passwd: false
+      passwd: sha512 - passwd
+      ssh-authorized-keys:
+        - ssh-key name user
+ssh_pwauth: false
+package_update: true
+packages:
+   - qemu-guest-agent
+
+write_files:
+  - path: /opt/check_ip.sh
+    permissions: "0700"    
+    content: |
+     #!/bin/bash
+     TOKEN="" # Тут ваш ID телеграмм бота!
+     CHAT_ID=""                                   # Тут ваш ID телграмма чата!
+     INTERFESSES=$(ls /sys/class/net | grep en)
+     IPUSER=$(ip --brief address show $INTERFESSES | awk '{print $3}' | cut -d'/' -f1)
+     MESSAGE="
+     🤠 KVM -> NEW VM
+     HOSTNAME: $HOSTNAME 
+     IP: $IPUSER"
+     URL="https://api.telegram.org/bot$TOKEN/sendMessage"
+     curl -s -X POST $URL -d chat_id=$CHAT_ID -d text="$MESSAGE" > /dev/null 2>&1
+  - path: /opt/install.sh
+    permissions: "0700"
+    content: | 
+      #!/bin/bash 
+      dnf update -y 
+      dnf install -y epel-release
+      dnf update -y 
+      dnf install -y htop mc vim
+runcmd:
+ - bash /opt/./install.sh
+ - bash /opt/./check_ip.sh
+ - rm -rf /opt/*
+final_message: "The system is finally up, after $UPTIME seconds" 
